@@ -43,29 +43,33 @@
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
         <h4 class="text-center mb-4">Create Account</h4>
-        <form action="RegisterServlet" method="post">
+        <form:form action="/register" method="post" modelAttribute="registerUser">
             <div class="row g-3">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="firstName" placeholder="First name" required>
+                    <form:input type="text" class="form-control"
+                                name="firstName" placeholder="First name" path="firstName"/>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="lastName" placeholder="Last name" required>
+                    <form:input type="text" class="form-control"
+                                name="lastName" placeholder="Last name" path="lastName"/>
                 </div>
                 <div class="col-12">
-                    <input type="email" class="form-control" name="email" placeholder="Email address" required>
+                    <form:input type="email" class="form-control"
+                                name="email" placeholder="Email address" path="email"/>
                 </div>
                 <div class="col-md-6">
-                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    <form:input type="password" class="form-control"
+                                name="password" placeholder="Password" path="password"/>
                 </div>
                 <div class="col-md-6">
-                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password"
-                           required>
+                    <form:input type="password" class="form-control"
+                                name="confirmPassword" placeholder="Confirm Password" path="comfirmPassword"/>
                 </div>
                 <div class="col-12 d-grid">
                     <button type="submit" class="btn btn-primary">Create Account</button>
                 </div>
             </div>
-        </form>
+        </form:form>
         <div class="login-link text-muted">
             <small>Have an account? <a href="login.jsp">Go to login</a></small>
         </div>

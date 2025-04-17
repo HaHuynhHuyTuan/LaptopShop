@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Role;
 import com.example.demo.domain.User;
+import com.example.demo.domain.dto.RegisterDTO;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,11 @@ public class UserService {
         return this.roleRepository.findByName(name);
     }
 
-    
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() + "" + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
+    }
 }
