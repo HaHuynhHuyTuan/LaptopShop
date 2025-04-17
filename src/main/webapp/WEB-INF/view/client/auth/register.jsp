@@ -44,6 +44,12 @@
     <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
         <h4 class="text-center mb-4">Create Account</h4>
         <form:form action="/register" method="post" modelAttribute="registerUser">
+            <c:set var="errorsPassword">
+                <form:errors path="confirmPassword" cssClass="invalid-feedback"/>
+            </c:set>
+            <c:set var="errorsEmail">
+                <form:errors path="email" cssClass="invalid-feedback"/>
+            </c:set>
             <div class="row g-3">
                 <div class="col-md-6">
                     <form:input type="text" class="form-control"
@@ -54,12 +60,17 @@
                                 name="lastName" placeholder="Last name" path="lastName"/>
                 </div>
                 <div class="col-12">
-                    <form:input type="email" class="form-control"
+                    <form:input type="email"
+                                class="form-control ${not empty errorsEmail ? 'is-invalid': ''}"
                                 name="email" placeholder="Email address" path="email"/>
+                        ${errorsEmail}
                 </div>
                 <div class="col-md-6">
-                    <form:input type="password" class="form-control"
+                    <form:input type="password"
+                                class="form-control ${not empty errorsPassword ? 'is-invalid': ''}"
                                 name="password" placeholder="Password" path="password"/>
+                    <form:errors path="confirmPassword"/>
+                        ${errorsPassword}
                 </div>
                 <div class="col-md-6">
                     <form:input type="password" class="form-control"
