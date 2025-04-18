@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="vi">
@@ -15,24 +15,26 @@
     <div id="layoutSidenav_content">
         <main class="p-4">
             <div class="container-fluid px-4">
-                <h2 class="mb-4">Chi tiết người dùng</h2>
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>ID:</strong> ${user.id}</li>
-                    <li class="list-group-item"><strong>Họ tên:</strong> ${user.fullName}</li>
-                    <li class="list-group-item"><strong>Email:</strong> ${user.email}</li>
-                    <li class="list-group-item"><strong>Địa chỉ:</strong> ${user.address}</li>
-                    <li class="list-group-item"><strong>SĐT:</strong> ${user.phone}</li>
-                    <!-- Thêm dòng này để hiển thị role -->
-                    <li class="list-group-item"><strong>Role:</strong> ${user.role.name}</li>
+                <h3 class="mb-4">Chi tiết người dùng</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>ID:</strong> ${user.id}</p>
+                        <p><strong>Họ tên:</strong> ${user.fullName}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                        <p><strong>Địa chỉ:</strong> ${user.address}</p>
+                        <p><strong>SĐT:</strong> ${user.phone}</p>
+                        <p><strong>Role:</strong> ${user.role.name}</p>
+                    </div>
+                    <%--                    <div class="col-md-6">--%>
+                    <%--                        <c:if test="${not empty user.avatar}">--%>
+                    <%--                            <img src="${pageContext.request.contextPath}/resources/images/avatar/${user.avatar}"--%>
+                    <%--                                 alt="Ảnh người dùng" class="img-fluid"--%>
+                    <%--                                 style="max-width: 300px; max-height: 300px;">--%>
 
-                    <!-- Hiển thị ảnh người dùng -->
-                    <li class="list-group-item">
-                        <strong>Ảnh người dùng:</strong>
-                        <img src="/uploads/images/${user.avatar}" alt="Ảnh người dùng" class="img-fluid"
-                             style="max-width: 200px; max-height: 200px;"/>
-                    </li>
-                </ul>
-                <a href="/admin/user" class="btn btn-secondary mt-3">Quay lại</a>
+                    <%--                        </c:if>--%>
+                    <%--                    </div>--%>
+                </div>
+                <a href="/admin/user" class="btn btn-secondary mt-3">Quay lại danh sách</a>
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>
