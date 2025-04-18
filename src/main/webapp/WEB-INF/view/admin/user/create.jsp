@@ -33,79 +33,76 @@
                 <h3 class="mb-4">Tạo Người Dùng Mới</h3>
                 <form:form action="/admin/user/create" method="post" enctype="multipart/form-data"
                            modelAttribute="user">
-                <div class="row mb-3">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <c:set var="errorsEmail">
-                                <form:errors path="email" cssClass="invalid-feedback"/>
-                            </c:set>
-                            <label>Email:</label>
+                            <!-- Xử lý lỗi cho email -->
+                            <label for="email" class="form-label">Email:</label>
                             <form:input path="email"
                                         class="form-control ${not empty errorsEmail ? 'is-invalid': ''}"
-                                        type="email"
-                            />
-                                ${errorsEmail}
+                                        type="email" id="email" placeholder="Nhập email"/>
+                            <form:errors path="email" cssClass="invalid-feedback"/>
                         </div>
+
                         <div class="col-md-6">
-                            <c:set var="errorsPassword">
-                                <form:errors path="password" cssClass="invalid-feedback"/>
-                            </c:set>
-                            <label>Password:</label>
+                            <!-- Xử lý lỗi cho password -->
+                            <label for="password" class="form-label">Password:</label>
                             <form:password path="password"
                                            class="form-control ${not empty errorsPassword ? 'is-invalid': ''}"
-                            />
-                                ${errorsPassword}
+                                           id="password" placeholder="Nhập mật khẩu"/>
+                            <form:errors path="password" cssClass="invalid-feedback"/>
                         </div>
                     </div>
-                    <div class="row mb-3">
+
+                    <div class="row g-3">
+                        <!-- Họ và tên -->
                         <div class="col-md-6">
-                            <c:set var="errorsPhone">
-                                <form:errors path="phone" cssClass="invalid-feedback"/>
-                            </c:set>
-                            <label>Số điện thoại:</label>
-                            <form:input path="phone"
-                                        class="form-control ${not empty errorsPhone ? 'is-invalid': ''}"
-                            />
-                                ${errorsPhone}
+                            <label for="fullName" class="form-label">Họ và tên</label>
+                            <form:input path="fullName" class="form-control" id="fullName"
+                                        placeholder="Nhập họ và tên"/>
+                            <form:errors path="fullName" cssClass="invalid-feedback"/>
                         </div>
+
+                        <!-- Số điện thoại -->
                         <div class="col-md-6">
-                            <c:set var="errorsFullName">
-                                <form:errors path="fullName" cssClass="invalid-feedback"/>
-                            </c:set>
-                            <label>Họ và tên:</label>
-                            <form:input path="fullName"
-                                        class="form-control ${not empty errorsFullName ? 'is-invalid': ''}"
-                            />
-                                ${errorsFullName}
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <form:input path="phone" class="form-control" id="phone" placeholder="Nhập số điện thoại"/>
                         </div>
                     </div>
+
                     <div class="mb-3">
-                        <label>Địa chỉ:</label>
-                        <form:input path="address" class="form-control"/>
+                        <label for="address" class="form-label">Địa chỉ:</label>
+                        <form:input path="address" class="form-control" id="address" placeholder="Nhập địa chỉ"/>
                     </div>
+
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label>Vai trò:</label>
-                            <form:select path="role.name" class="form-select">
+                            <label for="role" class="form-label">Vai trò:</label>
+                            <form:select path="role.name" class="form-select" id="role">
                                 <form:option value="" label="-- Chọn Vai Trò --"/>
                                 <form:option value="ADMIN">ADMIN</form:option>
                                 <form:option value="USER">USER</form:option>
                             </form:select>
                         </div>
+
                         <div class="col-md-6">
                             <label for="avatarFile" class="form-label">Avatar:</label>
                             <input type="file" name="avatarFile" class="form-control" id="avatarFile"
                                    accept=".png, .jpg, .jpeg"/>
                         </div>
-                        <div class="col-12 mb-3">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
                             <img style="max-height: 250px; display: none;" alt="Avatar Preview" id="avatarPreview"/>
                         </div>
-                        <div class="col-12 mb-3">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
                             <button type="submit" class="btn btn-primary">Tạo Người Dùng</button>
                         </div>
                     </div>
-                    </form:form>
-                </div>
+                </form:form>
             </div>
         </main>
         <jsp:include page="../layout/footer.jsp"/>

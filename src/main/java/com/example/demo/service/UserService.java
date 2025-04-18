@@ -5,7 +5,6 @@ import com.example.demo.domain.User;
 import com.example.demo.domain.dto.RegisterDTO;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,5 +54,9 @@ public class UserService {
 
     public boolean checkEmailExits(String email) {
         return this.userRepository.existsByEmail(email);
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email);
     }
 }

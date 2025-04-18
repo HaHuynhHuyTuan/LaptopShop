@@ -28,8 +28,6 @@ public class User {
     private String password;
     private String address;
 
-    @NotEmpty
-    @Pattern(regexp = "\\d{10,11}", message = "Phone number must be 10-11 digits")
     private String phone;
     private String avatar;
 

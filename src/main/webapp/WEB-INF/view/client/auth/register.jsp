@@ -50,10 +50,15 @@
             <c:set var="errorsEmail">
                 <form:errors path="email" cssClass="invalid-feedback"/>
             </c:set>
+            <c:set var="errorsName">
+                <form:errors path="firstName" cssClass="invalid-feedback"/>
+            </c:set>
             <div class="row g-3">
                 <div class="col-md-6">
-                    <form:input type="text" class="form-control"
-                                name="firstName" placeholder="First name" path="firstName"/>
+                    <form:input type="text"
+                                class="form-control ${not empty errorsName ? 'is-invalid': ''}"
+                                name="name" placeholder="Firts name" path="firstName"/>
+                        ${errorsName}
                 </div>
                 <div class="col-md-6">
                     <form:input type="text" class="form-control"
@@ -65,16 +70,19 @@
                                 name="email" placeholder="Email address" path="email"/>
                         ${errorsEmail}
                 </div>
+                    <%--                <div class="col-12">--%>
+                    <%--                    <form:input path="phone" type="phone" class="form-control"--%>
+                    <%--                                placeholder="Phone number"/>--%>
+                    <%--                </div>--%>
                 <div class="col-md-6">
                     <form:input type="password"
                                 class="form-control ${not empty errorsPassword ? 'is-invalid': ''}"
                                 name="password" placeholder="Password" path="password"/>
-                    <form:errors path="confirmPassword"/>
                         ${errorsPassword}
                 </div>
                 <div class="col-md-6">
                     <form:input type="password" class="form-control"
-                                name="confirmPassword" placeholder="Confirm Password" path="comfirmPassword"/>
+                                name="confirmPassword" placeholder="Confirm Password" path="confirmPassword"/>
                 </div>
                 <div class="col-12 d-grid">
                     <button type="submit" class="btn btn-primary">Create Account</button>
@@ -82,7 +90,7 @@
             </div>
         </form:form>
         <div class="login-link text-muted">
-            <small>Have an account? <a href="login.jsp">Go to login</a></small>
+            <small>Have an account? <a href="/login">Go to login</a></small>
         </div>
     </div>
 </div>
@@ -90,4 +98,4 @@
 <!-- Bootstrap JS (optional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+</html>

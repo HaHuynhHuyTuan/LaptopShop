@@ -26,7 +26,7 @@ public class HomePageController {
 
     public HomePageController(
             ProductService productService,
-            UserService UserService,
+            UserService userService,
             PasswordEncoder passwordEncoder
     ) {
         this.productService = productService;
@@ -35,12 +35,12 @@ public class HomePageController {
     }
 
     @GetMapping("/")
-    public String getMethodName(Model model) {
+    public String showHomePage(Model model) {
         List<Product> products = this.productService.findAll();
         model.addAttribute("products", products);
         return "client/homepage/show";
     }
-
+    
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
         model.addAttribute("registerUser", new RegisterDTO());
