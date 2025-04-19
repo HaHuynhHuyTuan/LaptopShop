@@ -1,13 +1,15 @@
 package com.example.demo.config;
 
+import com.example.demo.domain.User;
+import com.example.demo.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
@@ -18,21 +20,38 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
-    protected void clearAuthenticationAttributes(HttpServletRequest request) {
+    private final UserService userService;
+
+    public CustomSuccessHandler(UserService userService) {
+        this.userService = userService;
+    }
+
+    protected void clearAuthenticationAttributes(HttpServletRequest request, Authentication authentication) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        // get email
+        String email = authentication.getName();
+        //query user
+        User user = this.userService.getUserByEmail(email);
+        if (user != null) {
+            session.setAttribute("fullName", user.getFullName());
+            session.setAttribute("avatar", user.getAvatar());
+        }
+//        session.setAttribute("fullName", "Hà Huỳnh Huy Tuấn");
     }
 
     protected String determineTargetUrl(final Authentication authentication) {
 
         Map<String, String> roleTargetUrlMap = new HashMap<>();
-        roleTargetUrlMap.put("ROLE_USER", "/");
         roleTargetUrlMap.put("ROLE_ADMIN", "/admin");
+        roleTargetUrlMap.put("ROLE_USER", "/");
+
 
         final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (final GrantedAuthority grantedAuthority : authorities) {
@@ -58,6 +77,6 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         }
 
         redirectStrategy.sendRedirect(request, response, targetUrl);
-        clearAuthenticationAttributes(request);
+        clearAuthenticationAttributes(request, authentication);
     }
 }

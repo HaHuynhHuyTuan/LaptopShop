@@ -40,7 +40,7 @@ public class HomePageController {
         model.addAttribute("products", products);
         return "client/homepage/show";
     }
-    
+
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
         model.addAttribute("registerUser", new RegisterDTO());
@@ -69,5 +69,10 @@ public class HomePageController {
     @GetMapping("/login")
     public String getLoginPage(Model model) {
         return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage(Model model) {
+        return "client/auth/deny";
     }
 }
